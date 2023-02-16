@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-wrapper">
+
+    <div class="card">
+        <div class="center">
+            <a href="/requestorDashboard" class="btn btn--secondary">Go back To {{rid}}'s Dashboard</a>
+        </div>
+    
+        <h1 class="center">All Tasks</h1>
+    </div>
+
+        <p>{{tasksList}}</p>
+        
+        {% for i in tasksList %}
+            <div class="card">
+                <div class="center">
+                    <p>
+                        <strong>Task Name:</strong> {{i.tName}}<br>
+                        <strong>Task Description:</strong>{{i.tDescription}}<br>
+                        <strong>Task Amount:</strong> {{i.tAmount}}<br>
+                        <a href="/requestorDashboard/{{rid}}/viewallReportsOfTask/{{i._id}}"><button>View Reports</button></a>
+                    </p>
+                    
+                </div>
+            
+            </div>
+        {% endfor %}
+        
+</div>
+{% endblock %}

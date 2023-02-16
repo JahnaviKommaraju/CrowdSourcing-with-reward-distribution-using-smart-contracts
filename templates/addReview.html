@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-wrapper">
+
+    <div class="card">
+        <div class="center">
+            <a href="/workerDashboard" class="btn btn--secondary">Go back To {{wid}}'s Dashboard</a>
+            </div>
+    
+        <h1 class="center">Add Review {{rID}}</h1>
+        <form name="addReport_form" method="POST">
+            <label for="taskName">Report Rating</label>
+            <input type="text" name="rRating" class="field" placeholder="Rate report on sacle of 0-5" required>
+
+            <label for="taskDescription">Comment</label>
+            <input type="text" name="rComment" class="field" placeholder="enter comment" required>
+
+            <input type="submit" value="Submit Review" class="btn">
+
+        </form>
+    </div>
+
+
+</div>
+{% endblock %}

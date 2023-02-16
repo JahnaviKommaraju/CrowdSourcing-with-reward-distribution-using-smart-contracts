@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-wrapper">
+
+    <div class="card">
+        <div class="center">
+            <a href="/workerDashboard" class="btn btn--secondary">Go back To {{wid}}'s Dashboard</a>
+            </div>
+    
+        <h1 class="center">Add a Report  - {{tName}}</h1>
+        <form name="addReport_form" method="POST">
+            <label for="taskName">Report Name</label>
+            <input type="text" name="rName" class="field" placeholder="Enter report name" required>
+
+            <label for="taskDescription">Report Content</label>
+            <input type="text" name="rContent" class="field" placeholder="enter report Content" required>
+
+            <input type="submit" value="Submit Report" class="btn">
+
+        </form>
+    </div>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="card">
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<div class="card-wrapper">
+
+    <div class="card">
+        <div class="center">
+            <a href="/workerDashboard" class="btn btn--secondary">Go back To {{wid}}'s Dashboard</a>
+        </div>
+    
+        <h1 class="center">Review Reports</h1>
+    </div>
+
+        <!-- <p>{{reviewReports}}</p> -->
+        {% for i in reviewReports %}
+            <div class="card">
+                <div class="center">
+                    <p>
+                        <strong>Task Description:</strong>{{i.rTaskDescription}}<br>
+                        <strong>Report Content:</strong>{{i.rContent}}<br>
+                        <a href="/workerDashboard/{{wid}}/{{i.rTaskID}}/{{i.rID}}/addReview"><button>Add Reviews</button></a>
+                    </p>
+                    
+                </div>
+            
+            </div>
+        {% endfor %}
+        
+</div>
+{% endblock %}

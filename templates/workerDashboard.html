@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+<!-- <p>Dashboard</p>
+{{session['logged_in']}}
+{{session['user']}} -->
+<!-- {% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+    <div class="card">
+        {{ message }}
+    </div>
+    {% endfor %}
+{% endif %}
+{% endwith %} -->
+    <div class="card-wrapper">
+        <div class="card">
+
+            <h1 class="center">Worker Dashboard</h1>
+            <p class="center">You are logged in</p>
+
+            <div class="center">
+                <a href="workerDashboard/{{session['user']['_id']}}/viewTasks" class="btn btn--secondary"> View Tasks</a>
+            </div>
+    
+            <div class="center">
+                    <a href="viewallReportsOfWorker/{{session['user']['_id']}}" class="btn btn--secondary">View Your Reports</a>
+            </div>
+
+            <div class="center">
+                <a href="workerDashboard/{{session['user']['_id']}}/viewReportsForReview" class="btn btn--secondary">Review Reports</a>
+            </div>
+
+            <div class="center">
+                    <a href="user/signout" class="btn btn--secondary">Sign Out</a>
+            </div>
+        </div>
+
+            <div class="card">
+                <h1 class="center">Your Info</h1>
+                <p>
+                    <strong>ID:</strong> {{session['user']['_id']}}<br>
+                    <strong>Name:</strong> {{session['user']['name']}}<br>
+                    <strong>Email:</strong> {{session['user']['email']}}<br>
+                    <strong>Wallet Address:</strong> {{session['user']['wAddress']}}<br>
+                </p>
+            </div>
+    
+    </div>
+
+{% endblock %}

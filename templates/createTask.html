@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-wrapper">
+
+    <div class="card">
+        <div class="center">
+            <a href="/requestorDashboard" class="btn btn--secondary">Go back To {{rid}}'s Dashboard</a>
+            </div>
+    
+        <h1 class="center">Create Task</h1>
+        <form name="createTask_form" method="POST" action="/requestorDashboard/{{rid}}/createTask">
+            <label for="taskName">Task Name</label>
+            <input type="text" name="tName" class="field" placeholder="Enter task name" required>
+
+            <label for="taskDescription">Task Description</label>
+            <input type="text" name="tDescription" class="field" placeholder="enter task Description" required>
+
+            <label for="taskDescription">Total Amount For Task</label>
+            <input type="text" name="tAmount" class="field" placeholder="max 100 eth">
+
+            <input type="submit" value="Create Task" class="btn">
+
+        </form>
+    </div>
+
+
+</div>
+{% endblock %}

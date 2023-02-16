@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card-wrapper">
+
+    <div class="card">
+        <div class="center">
+            <a href="/requestorDashboard" class="btn btn--secondary">Go back To {{requestorId}}'s Dashboard</a>
+        </div>
+    
+        <h1 class="center">All Reports</h1>
+        <!-- <h1>Task {{taskid}}</h1> -->
+    </div>
+        <!-- <p>{{data}}</p> -->
+        
+        {% for i in data %}
+            <div class="card">
+                <div class="center">
+                    <!-- {{i}} -->
+                    <p>
+                        <strong>Report Content:</strong>{{i.reportContent}}<br>
+                        <strong>Report Avg Rating:</strong>{{i.reportAvgRating}}<br>
+                        <a href="/{{requestorId}}/{{i._id}}/sendReward/{{i['workerID']}}"><button>Send Reward</button></a>
+                    </p>
+                    
+                </div>
+            
+            </div>
+        {% endfor %}
+        
+</div>
+{% endblock %}
