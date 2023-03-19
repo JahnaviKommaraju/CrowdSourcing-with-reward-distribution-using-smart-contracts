@@ -20,8 +20,13 @@
             <p>
                 <strong>Worker Wallet Address: </strong><br>{{wAddress}}<br>
                 <strong>Your Wallet Address: </strong><br>{{requestorWAdress}}<br>
-                
+                <strong>Reward Amount:</strong><br>{{rewardAmt}}<br>
             </p>
+
+            <form name="amountTransaction_form" action="/amountTransaction/{{wAddress}}/{{requestorWAdress}}/{{rewardAmt}}" method="POST">
+                <input name="requestorPrivateKey" type="password" placeholder="Enter Your Private Key">
+                <input type="submit" value="Submit">
+            </form>
             
         </div>
     

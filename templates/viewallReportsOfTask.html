@@ -12,7 +12,8 @@
         <h1 class="center">All Reports</h1>
         <!-- <h1>Task {{taskid}}</h1> -->
     </div>
-        <!-- <p>{{data}}</p> -->
+        <!-- <p>{{data}}</p>
+        <p>{{reportAmounts}}</p> -->
         
         {% for i in data %}
             <div class="card">
@@ -21,7 +22,8 @@
                     <p>
                         <strong>Report Content:</strong>{{i.reportContent}}<br>
                         <strong>Report Avg Rating:</strong>{{i.reportAvgRating}}<br>
-                        <a href="/{{requestorId}}/{{i._id}}/sendReward/{{i['workerID']}}"><button>Send Reward</button></a>
+                        <strong>Reward:</strong>{{reportAmounts[i['workerID']]}}
+                    <br><a href="/{{requestorId}}/{{i._id}}/sendReward/{{reportAmounts[i['workerID']]}}/{{i['workerID']}}"><button>Send Reward</button></a>
                     </p>
                     
                 </div>

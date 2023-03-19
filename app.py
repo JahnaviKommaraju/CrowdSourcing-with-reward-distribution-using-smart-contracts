@@ -5,7 +5,8 @@ import pymongo
 import json
 from bson import json_util
 from bson.objectid import ObjectId
-
+import final_transaction
+from passlib.hash import pbkdf2_sha256
 app = Flask(__name__)
 app.secret_key = b'\x11\xca\xa8\xc8\xca\xfb\x84\xce\xbe\x85\xe5TG\x0c+\x8c'
 
@@ -361,16 +362,33 @@ def getReportDetailsForTask(requestorId,taskid):
 def viewallReportsOfTask(rid,taskid):
     # reportDetailsList=getReportDetailsForTask(rid,taskid)
     data=getReportDetailsForTask(rid,taskid)
+    eachTask= db.tasks.find_one({'_id':ObjectId(taskid)})
+    reportAmounts= final_transaction.getReportRatings(data,eachTask['tAmount'])
     # workerWalletAddress= getReportDetailsForTask(rid,taskid)
-    return render_template('viewallReportsOfTask.html',data=data,requestorId=rid, taskid=taskid)
+    return render_template('viewallReportsOfTask.html',data=data,requestorId=rid, taskid=taskid,reportAmounts=reportAmounts)
 
-@app.route('/<requestorId>/<rid>/sendReward/<workerID>',methods=['GET','POST'])
+@app.route('/<requestorId>/<rid>/sendReward/<rewardAmt>/<workerID>',methods=['GET','POST'])
 @login_required
-def sendReward(requestorId,rid,workerID):
+def sendReward(requestorId,rid,rewardAmt,workerID):
     workerWAdress=db.workers.find_one({'_id':workerID})
     requestorWAdress = db.requestors.find_one({'_id':requestorId})
-    return render_template('sendReward.html',requestorId=requestorId,wAddress=workerWAdress['wAddress'],requestorWAdress=requestorWAdress['wAddress'],rid=rid,workerID=workerID)
+    print(workerWAdress['wAddress'],requestorWAdress['wAddress'],rewardAmt)
+    # amountTransaction(workerWAdress['wAddress'],requestorWAdress['wAddress'],rewardAmt)
+    return render_template('sendReward.html',requestorId=requestorId,wAddress=workerWAdress['wAddress'],requestorWAdress=requestorWAdress['wAddress'],rewardAmt=rewardAmt,rid=rid,workerID=workerID)
 
+@app.route('/amountTransaction/<wAddress>/<requestorWAdress>/<rewardAmt>',methods=['GET','POST'])
+@login_required
+def amountTransaction(wAddress,requestorWAdress,rewardAmt):
+    # print(request.form)
+    if request.method=='POST':
+        print(wAddress,requestorWAdress,rewardAmt)
+        print(request.form)
+        privateKey=request.form['requestorPrivateKey']
+        data=final_transaction.sendRewardAmt(wAddress,requestorWAdress,rewardAmt,privateKey)
+        # request.form['requestorPrivateKey']=pbkdf2_sha256.encrypt(request.form.get('requestorPrivateKey'))
+        print('----------------')
+        print(data)
+        return render_template('amountTransaction.html',data=data)
 # main driver function
 if __name__ == '__main__':
  
