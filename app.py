@@ -65,6 +65,7 @@ def createTask(requestorID):
                 "reportSubmitterAddress":[]
                 }
         print(newtask)
+        # final_transaction.createTask(requestorID,taskName,taskDescription,int(tAmount))
         dbResponse=db.tasks.insert_one(newtask)
         db.requestors.update_one({'_id': requestorID},
                                 {"$push":{
@@ -140,6 +141,7 @@ def addReport(wid,tid,tName):
             print(worker_found)
             flash("you have already submitted the report")
             return render_template('workerDashboard.html')
+        print('no')
         dbResponse=db.reports.insert_one(newReport)
         updateTask=db.tasks.update_one({'_id': ObjectId(tid)},
                              {"$push":{
@@ -278,8 +280,6 @@ def addReview(wid,rTaskID,rID):
                     "reportRating" : reportRating,
                     "reportComment": reportComment
                 }
-
-        
 
         print(newReview)
 
